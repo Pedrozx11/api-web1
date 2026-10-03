@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulta de notificações - SINAN</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Ficha de Notificação/Conclusão
+      <small>SINAN - Sistema de Informação de Agravos de Notificação</small>
+    </h1>
+    <nav>
+      <a href="index.html" class="ativo">Consultar notificações</a>
+      <a href="cadastro.html">Nova notificação</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="aviso" hidden role="alert"></div>
+
+    <form id="filtros" class="painel" aria-label="Filtros de consulta">
+      <div class="grade">
+        <label>Nome do paciente
+          <input name="nomePaciente" maxlength="100" autocomplete="off">
+        </label>
+        <label>Agravo/doença
+          <input name="agravo" maxlength="100" autocomplete="off">
+        </label>
+        <label>Código CID10
+          <input name="codigoCid10" maxlength="5" placeholder="Ex.: A90">
+        </label>
+        <label>UF de notificação
+          <select name="ufNotificacao" data-uf="filtro"></select>
+        </label>
+        <label>Município de notificação
+          <input name="municipioNotificacao" maxlength="100" autocomplete="off">
+        </label>
+        <label>Sexo
+          <select name="sexo">
+            <option value="">Todos</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="I">Ignorado</option>
+          </select>
+        </label>
+        <label>Classificação final
+          <select name="classificacaoFinal">
+            <option value="">Todas</option>
+            <option value="1">Confirmado</option>
+            <option value="2">Descartado</option>
+          </select>
+        </label>
+        <label>Evolução do caso
+          <select name="evolucao">
+            <option value="">Todas</option>
+            <option value="1">Cura</option>
+            <option value="2">Óbito pelo agravo notificado</option>
+            <option value="3">Óbito por outras causas</option>
+            <option value="9">Ignorado</option>
+          </select>
+        </label>
+        <label>Notificação a partir de
+          <input type="date" name="dataNotificacaoInicio">
+        </label>
+        <label>Notificação até
+          <input type="date" name="dataNotificacaoFim">
+        </label>
+        <label class="check">
+          <input type="checkbox" name="duplicadas" value="true">
+          Somente notificações duplicadas
+        </label>
+      </div>
+      <div class="botoes">
+        <button type="submit">Buscar</button>
+        <button type="button" class="secundario" id="limpar">Limpar filtros</button>
+        <a class="botao secundario" href="cadastro.html">Nova notificação</a>
+      </div>
+    </form>
+
+    <p class="contagem" id="contagem" aria-live="polite"></p>
+
+    <div class="tabela-rolagem">
+      <table>
+        <thead>
+          <tr>
+            <th>Nº</th>
+            <th>Agravo/doença</th>
+            <th>Paciente</th>
+            <th>Nascimento</th>
+            <th>Nome da mãe</th>
+            <th>Data da notificação</th>
+            <th>Município</th>
+            <th>Classificação</th>
+            <th>Evolução</th>
+            <th>Alterar</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody id="corpo"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/consulta.js"></script>
+</body>
+</html>

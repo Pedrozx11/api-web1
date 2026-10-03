@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ficha de notificação - SINAN</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Ficha de Notificação/Conclusão
+      <small>SINAN - Sistema de Informação de Agravos de Notificação</small>
+    </h1>
+    <nav>
+      <a href="index.html">Consultar notificações</a>
+      <a href="cadastro.html" class="ativo">Nova notificação</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 id="titulo">Nova notificação</h2>
+    <div id="aviso" hidden role="alert"></div>
+
+    <form id="ficha" novalidate>
+
+      <fieldset>
+        <legend>Dados gerais</legend>
+        <div class="grade">
+          <label>1 - Tipo de notificação
+            <input value="2 - Individual" readonly>
+          </label>
+          <label class="req largo">2 - Agravo/doença
+            <input name="agravo" maxlength="100">
+          </label>
+          <label class="req">2 - Código (CID10)
+            <input name="codigoCid10" maxlength="5" placeholder="Ex.: A90">
+          </label>
+          <label class="req">3 - Data da notificação
+            <input type="date" name="dataNotificacao">
+          </label>
+          <label class="req">4 - UF
+            <select name="ufNotificacao" data-uf="form"></select>
+          </label>
+          <label class="req largo">5 - Município de notificação
+            <input name="municipioNotificacao" maxlength="100">
+          </label>
+          <label>5 - Código (IBGE)
+            <input name="codigoIbgeMunicipioNotificacao" maxlength="7" inputmode="numeric">
+          </label>
+          <label class="req largo">6 - Unidade de saúde (ou outra fonte notificadora)
+            <input name="unidadeSaude" maxlength="150">
+          </label>
+          <label>6 - Código (CNES)
+            <input name="codigoUnidadeSaude" maxlength="7" inputmode="numeric">
+          </label>
+          <label class="req">7 - Data dos primeiros sintomas
+            <input type="date" name="dataPrimeirosSintomas">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Notificação individual</legend>
+        <div class="grade">
+          <label class="req largo">8 - Nome do paciente
+            <input name="nomePaciente" maxlength="100">
+          </label>
+          <label>9 - Data de nascimento
+            <input type="date" name="dataNascimento">
+          </label>
+          <label>10 - Idade: unidade
+            <select name="idadeUnidade" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Hora</option>
+              <option value="2">2 - Dia</option>
+              <option value="3">3 - Mês</option>
+              <option value="4">4 - Ano</option>
+            </select>
+          </label>
+          <label>10 - Idade: valor
+            <input type="number" name="idadeValor" min="0" max="130" data-int>
+            <small class="dica" id="dica-idade">Obrigatória quando não há data de nascimento. Com data de nascimento, é calculada pelo sistema.</small>
+          </label>
+          <label class="req">11 - Sexo
+            <select name="sexo">
+              <option value="">Selecione</option>
+              <option value="M">M - Masculino</option>
+              <option value="F">F - Feminino</option>
+              <option value="I">I - Ignorado</option>
+            </select>
+          </label>
+          <label>12 - Gestante
+            <select name="gestante" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - 1º trimestre</option>
+              <option value="2">2 - 2º trimestre</option>
+              <option value="3">3 - 3º trimestre</option>
+              <option value="4">4 - Idade gestacional ignorada</option>
+              <option value="5">5 - Não</option>
+              <option value="6">6 - Não se aplica</option>
+              <option value="9">9 - Ignorado</option>
+            </select>
+            <small class="dica">Obrigatório para o sexo feminino. Para o masculino, use 6.</small>
+          </label>
+          <label class="req">13 - Raça/Cor
+            <select name="racaCor" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Branca</option>
+              <option value="2">2 - Preta</option>
+              <option value="3">3 - Amarela</option>
+              <option value="4">4 - Parda</option>
+              <option value="5">5 - Indígena</option>
+              <option value="9">9 - Ignorado</option>
+            </select>
+          </label>
+          <label class="largo">14 - Escolaridade
+            <select name="escolaridade" data-int>
+              <option value="">Selecione</option>
+              <option value="0">0 - Analfabeto</option>
+              <option value="1">1 - 1ª a 4ª série incompleta do EF</option>
+              <option value="2">2 - 4ª série completa do EF</option>
+              <option value="3">3 - 5ª à 8ª série incompleta do EF</option>
+              <option value="4">4 - Ensino fundamental completo</option>
+              <option value="5">5 - Ensino médio incompleto</option>
+              <option value="6">6 - Ensino médio completo</option>
+              <option value="7">7 - Educação superior incompleta</option>
+              <option value="8">8 - Educação superior completa</option>
+              <option value="9">9 - Ignorado</option>
+              <option value="10">10 - Não se aplica</option>
+            </select>
+          </label>
+          <label>15 - Número do Cartão SUS
+            <input name="cartaoSus" maxlength="15" inputmode="numeric">
+          </label>
+          <label class="largo">16 - Nome da mãe
+            <input name="nomeMae" maxlength="100">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Dados de residência</legend>
+        <div class="grade">
+          <label class="check total">
+            <input type="checkbox" id="exterior">
+            Paciente reside fora do Brasil
+          </label>
+          <label id="campo-uf">17 - UF
+            <select name="ufResidencia" data-uf="form"></select>
+            <small class="dica">Obrigatória quando o paciente reside no Brasil.</small>
+          </label>
+          <label class="largo" id="campo-municipio">18 - Município de residência
+            <input name="municipioResidencia" maxlength="100">
+            <small class="dica">Obrigatório quando a UF é informada.</small>
+          </label>
+          <label id="campo-ibge">18 - Código (IBGE)
+            <input name="codigoIbgeMunicipioResidencia" maxlength="7" inputmode="numeric">
+          </label>
+          <label id="campo-pais" hidden>30 - País de residência
+            <input name="paisResidencia" maxlength="100">
+            <small class="dica">Obrigatório quando o paciente reside em outro país.</small>
+          </label>
+          <label>19 - Distrito
+            <input name="distritoResidencia" maxlength="100">
+          </label>
+          <label>20 - Bairro
+            <input name="bairroResidencia" maxlength="100">
+          </label>
+          <label class="largo">21 - Logradouro (rua, avenida, ...)
+            <input name="logradouro" maxlength="150">
+          </label>
+          <label>22 - Número
+            <input name="numeroResidencia" maxlength="20">
+          </label>
+          <label>23 - Complemento (apto., casa, ...)
+            <input name="complemento" maxlength="100">
+          </label>
+          <label>24 - Geo campo 1
+            <input name="geoCampo1" maxlength="20">
+          </label>
+          <label>25 - Geo campo 2
+            <input name="geoCampo2" maxlength="20">
+          </label>
+          <label class="largo">26 - Ponto de referência
+            <input name="pontoReferencia" maxlength="150">
+          </label>
+          <label>27 - CEP
+            <input name="cep" maxlength="9" placeholder="00000-000" inputmode="numeric">
+          </label>
+          <label>28 - (DDD) Telefone
+            <input name="telefone" maxlength="15" placeholder="(83) 99999-9999" inputmode="tel">
+          </label>
+          <label>29 - Zona
+            <select name="zona" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Urbana</option>
+              <option value="2">2 - Rural</option>
+              <option value="3">3 - Periurbana</option>
+              <option value="9">9 - Ignorado</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Conclusão</legend>
+        <div class="grade">
+          <label>31 - Data da investigação
+            <input type="date" name="dataInvestigacao">
+          </label>
+          <label>32 - Classificação final
+            <select name="classificacaoFinal" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Confirmado</option>
+              <option value="2">2 - Descartado</option>
+            </select>
+          </label>
+          <label class="largo">33 - Critério de confirmação/descarte
+            <select name="criterioConfirmacao" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Laboratorial</option>
+              <option value="2">2 - Clínico-epidemiológico</option>
+            </select>
+            <small class="dica">Obrigatório quando a classificação final é informada.</small>
+          </label>
+          <label class="largo">34 - O caso é autóctone do município de residência?
+            <select name="autoctone" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Sim</option>
+              <option value="2">2 - Não</option>
+              <option value="3">3 - Indeterminado</option>
+            </select>
+          </label>
+          <label>35 - UF (fonte de infecção)
+            <select name="ufInfeccao" data-uf="form"></select>
+          </label>
+          <label>36 - País (fonte de infecção)
+            <input name="paisInfeccao" maxlength="100">
+          </label>
+          <label>37 - Município (fonte de infecção)
+            <input name="municipioInfeccao" maxlength="100">
+          </label>
+          <label>38 - Distrito (fonte de infecção)
+            <input name="distritoInfeccao" maxlength="100">
+          </label>
+          <label>39 - Bairro (fonte de infecção)
+            <input name="bairroInfeccao" maxlength="100">
+          </label>
+          <label>40 - Doença relacionada ao trabalho
+            <select name="doencaTrabalho" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Sim</option>
+              <option value="2">2 - Não</option>
+              <option value="9">9 - Ignorado</option>
+            </select>
+          </label>
+          <label class="largo">41 - Evolução do caso
+            <select name="evolucao" data-int>
+              <option value="">Selecione</option>
+              <option value="1">1 - Cura</option>
+              <option value="2">2 - Óbito pelo agravo notificado</option>
+              <option value="3">3 - Óbito por outras causas</option>
+              <option value="9">9 - Ignorado</option>
+            </select>
+          </label>
+          <label>42 - Data do óbito
+            <input type="date" name="dataObito">
+            <small class="dica">Obrigatória quando a evolução é óbito.</small>
+          </label>
+          <label>43 - Data do encerramento
+            <input type="date" name="dataEncerramento">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Informações complementares e observações</legend>
+        <div class="grade">
+          <label class="total">Observações adicionais
+            <textarea name="observacoes" maxlength="1000"></textarea>
+          </label>
+          <label class="largo">Investigador: município/unidade de saúde
+            <input name="investigadorMunicipioUnidade" maxlength="150">
+          </label>
+          <label>Investigador: código da unidade (CNES)
+            <input name="investigadorCodigoUnidade" maxlength="7" inputmode="numeric">
+          </label>
+          <label class="largo">Investigador: nome
+            <input name="investigadorNome" maxlength="100">
+          </label>
+          <label>Investigador: função
+            <input name="investigadorFuncao" maxlength="100">
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="botoes">
+        <button type="submit" id="salvar">Salvar notificação</button>
+        <a class="botao secundario" href="index.html">Voltar para a consulta</a>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/cadastro.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+:root {
+  --fundo: #f3f5f4;
+  --papel: #ffffff;
+  --texto: #1d2a27;
+  --suave: #5b6b67;
+  --linha: #d3dbd8;
+  --marca: #0b6b5c;
+  --marca-escura: #084c41;
+  --perigo: #b3261e;
+  --perigo-fundo: #fdecea;
+  --ok-fundo: #e5f4ef;
+  --aviso: #8a5a00;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--texto);
+  background: var(--fundo);
+}
+
+header.topo {
+  background: var(--marca);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+header.topo h1 { margin: 0; font-size: 1.15rem; font-weight: 600; }
+header.topo small { display: block; font-weight: 400; opacity: .85; }
+header.topo nav a {
+  color: #fff;
+  margin-left: 16px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+header.topo nav a:hover,
+header.topo nav a.ativo { border-bottom-color: #fff; }
+
+main { max-width: 1280px; margin: 0 auto; padding: 20px 24px 48px; }
+
+fieldset, .painel {
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  margin: 0 0 18px;
+  padding: 14px 18px 18px;
+}
+legend { font-weight: 600; padding: 0 6px; color: var(--marca-escura); }
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px 16px;
+}
+.largo { grid-column: span 2; }
+.total { grid-column: 1 / -1; }
+@media (max-width: 560px) { .largo { grid-column: span 1; } }
+
+label { display: block; font-size: .85rem; color: var(--suave); }
+label.req::after { content: " *"; color: var(--perigo); }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 3px;
+  padding: 8px 9px;
+  font: inherit;
+  color: var(--texto);
+  background: #fff;
+  border: 1px solid #aab6b2;
+  border-radius: 4px;
+}
+textarea { min-height: 80px; resize: vertical; }
+input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+  outline: 3px solid #7fc3b6;
+  outline-offset: 1px;
+}
+input[readonly] { background: #eef1f0; }
+
+label.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--texto);
+  font-size: .95rem;
+  padding-top: 22px;
+}
+label.check input { width: auto; margin: 0; }
+
+.invalido input, .invalido select, .invalido textarea { border-color: var(--perigo); }
+small.erro { display: block; color: var(--perigo); margin-top: 3px; font-size: .8rem; }
+small.dica { display: block; color: var(--suave); margin-top: 3px; font-size: .78rem; }
+
+.botoes { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+button, a.botao {
+  font: inherit;
+  padding: 9px 18px;
+  border: 1px solid var(--marca);
+  border-radius: 4px;
+  background: var(--marca);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover, a.botao:hover { background: var(--marca-escura); }
+button.secundario, a.botao.secundario { background: #fff; color: var(--marca); }
+button.secundario:hover, a.botao.secundario:hover { background: var(--ok-fundo); }
+button.perigo { background: #fff; color: var(--perigo); border-color: var(--perigo); padding: 5px 12px; }
+button.perigo:hover { background: var(--perigo-fundo); }
+a.botao.pequeno { padding: 5px 12px; }
+
+.aviso { padding: 10px 14px; border-radius: 4px; margin: 0 0 16px; border: 1px solid; }
+.aviso.erro { background: var(--perigo-fundo); border-color: var(--perigo); color: var(--perigo); }
+.aviso.ok { background: var(--ok-fundo); border-color: var(--marca); color: var(--marca-escura); }
+.aviso ul { margin: 6px 0 0 18px; padding: 0; }
+[hidden] { display: none !important; }
+
+.tabela-rolagem { overflow-x: auto; background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--linha); vertical-align: middle; }
+thead th { background: #e6ece9; font-size: .85rem; color: var(--marca-escura); white-space: nowrap; }
+tbody tr:hover { background: #f7faf9; }
+td.acoes { white-space: nowrap; }
+td.vazio { text-align: center; color: var(--suave); padding: 28px; }
+.contagem { color: var(--suave); margin: 0 0 8px; }
